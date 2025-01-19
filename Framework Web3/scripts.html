@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>My project</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+    <link rel="stylesheet" href="TemplateData/style.css" />
+  </head>
+  <body class="dark">
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas"></canvas>
+    </div>
+    <div id="loading-cover" style="display: none">
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty" style="display: none">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+        <div class="spinner"></div>
+      </div>
+    </div>
+    <div id="unity-fullscreen-button" style="display: none"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBLOWTFmffWTD1HxI8N4EP_cYB23VqrS9A",
+            authDomain: "idle-game-e3f8c.firebaseapp.com",
+            projectId: "idle-game-e3f8c",
+            storageBucket: "idle-game-e3f8c.appspot.com",
+            messagingSenderId: "88961102272",
+            appId: "1:88961102272:web:0ecc7e2c6998d048f45825",
+            measurementId: "G-CG1MF03FRV",
+            databaseURL: "https://idle-game-e3f8c-default-rtdb.asia-southeast1.firebasedatabase.app/"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var _wall = '';
+        
+        function register(address){
+
+            firebase.database().ref(`idle-game/${address}`).set(JSON.parse(newPlayer())).then(function(unused) {
+              
+            });
+            console.log('AFTER');
+            return JSON.parse(newPlayer());
+        }
+
+        function getLeaderboard(limit)
+        {
+          firebase.database().ref('idle-game').orderByChild('-level').limitToFirst(limit).once('value', function(snapshot) {
+                var _leaderboard = [];
+                snapshot.forEach(function(childSnapshot) {
+                    _leaderboard.push(childSnapshot.val());
+                });
+                console.log(JSON.stringify(_leaderboard));
+            });
+        }
+
+        function getCurrentLocalTZ()
+        {
+            // Get current date and time
+            let now = new Date();
+
+            // Extract date components
+            let month = ('0' + (now.getMonth() + 1)).slice(-2); // pad with leading zero if needed
+            let day = ('0' + now.getDate()).slice(-2); // pad with leading zero if needed
+            let year = now.getFullYear();
+
+            // Extract time components
+            let hours = ('0' + now.getHours()).slice(-2); // pad with leading zero if needed
+            let minutes = ('0' + now.getMinutes()).slice(-2); // pad with leading zero if needed
+            let seconds = ('0' + now.getSeconds()).slice(-2); // pad with leading zero if needed
+
+            // Format the date and time as a string
+            let dateTimeString = `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
+            
+            return dateTimeString;
+        }
+
+        function newPlayer(){
+            var _newPlayer = "{\"level\":1,\"money\":0,\"tempMoney\":0,\"activatedSkillID\":0,\"quitTime\":\""+getCurrentLocalTZ()+"\",\"skills\":[{\"ID\":0,\"damageLevel\":0,\"speedLevel\":0,\"unlocked\":true},{\"ID\":1,\"damageLevel\":0,\"speedLevel\":0,\"unlocked\":false},{\"ID\":2,\"damageLevel\":0,\"speedLevel\":0,\"unlocked\":false},{\"ID\":3,\"damageLevel\":0,\"speedLevel\":0,\"unlocked\":false},{\"ID\":4,\"damageLevel\":0,\"speedLevel\":0,\"unlocked\":false},{\"ID\":5,\"damageLevel\":0,\"speedLevel\":0,\"unlocked\":false},{\"ID\":6,\"damageLevel\":0,\"speedLevel\":0,\"unlocked\":false},{\"ID\":7,\"damageLevel\":0,\"speedLevel\":0,\"unlocked\":false}]}"
+            return _newPlayer;
+        }
+
+        window.addEventListener('beforeunload', function (e) {
+            // Cancel the event
+            e.preventDefault();
+            e.returnValue = '';
+            
+            firebase.database().ref(`idle-game/${_wall}/quitTime`).set(getCurrentLocalTZ()).then(function(unused) {
+
+            });
+        });
+
+        window.ethereum.on('accountsChanged', function (accounts) {
+          alert("Changed account");
+
+          location.reload();
+        })
+
+    </script>
+
+    <script type="module">
+            const hideFullScreenButton = "";
+            const buildUrl = "Build";
+            const loaderUrl = buildUrl + "/Build.loader.js";
+            const config = {
+              dataUrl: buildUrl + "/Build.data",
+              frameworkUrl: buildUrl + "/Build.framework.js",
+              codeUrl: buildUrl + "/Build.wasm",
+              streamingAssetsUrl: "StreamingAssets",
+              companyName: "DefaultCompany",
+              productName: "My project",
+              productVersion: "1.0",
+            };
+
+            const container = document.querySelector("#unity-container");
+            const canvas = document.querySelector("#unity-canvas");
+            const loadingCover = document.querySelector("#loading-cover");
+            const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+            const progressBarFull = document.querySelector("#unity-progress-bar-full");
+            const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+            const spinner = document.querySelector('.spinner');
+
+            const canFullscreen = (function() {
+              for (const key of [
+                  'exitFullscreen',
+                  'webkitExitFullscreen',
+                  'webkitCancelFullScreen',
+                  'mozCancelFullScreen',
+                  'msExitFullscreen',
+                ]) {
+                if (key in document) {
+                  return true;
+                }
+              }
+              return false;
+            }());
+
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+              container.className = "unity-mobile";
+              config.devicePixelRatio = 1;
+            }
+            loadingCover.style.display = "";
+            const script = document.createElement("script");
+            script.src = loaderUrl;
+            script.onload = () => {
+              import('./lib/thirdweb-unity-bridge.js').then(module => {
+                createUnityInstance(canvas, config, (progress) => {
+                  spinner.style.display = "none";
+                  progressBarEmpty.style.display = "";
+                  progressBarFull.style.width = `${100 * progress}%`;
+                }).then((unityInstance) => {
+                  window._unityInstance = unityInstance;
+                  loadingCover.style.display = "none";
+                  if (canFullscreen) {
+                    if (!hideFullScreenButton) {
+                      fullscreenButton.style.display = "";
+                    }
+                    fullscreenButton.onclick = () => {
+                      unityInstance.SetFullscreen(1);
+                    };
+                  }
+                }).catch((message) => {
+                  alert(message);
+                });
+              });
+            };
+            document.body.appendChild(script);
+    </script>
+  </body>
+</html>
