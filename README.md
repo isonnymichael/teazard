@@ -22,6 +22,8 @@ Check out the live demo here:
 3. **Start the Game**  
    Interact with the game and use your TZD Tokens to upgrade stats and progress.
 
+TZD token contract: 0x7d601326D46cDc91Ae326FC062632B87cc35ba3f
+
 ## Features
 
 - **Blockchain Integration:** Built on the Tea Assam (Testnet).  
