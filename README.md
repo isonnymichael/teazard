@@ -1,4 +1,4 @@
-# Web3 Game
+# TEAZARD
 
 Another project for my journey learning Blockchain. This is a simple Web3 Idle Game where you can upgrade stats using the **TZD Token**.
 
