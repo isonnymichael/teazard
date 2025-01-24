@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour {
 			txtLeaderboard += i +". 0x00000000000000000000000000000000000000000 - Level 0 \n";
 		}
 
-		txtLeaderboard = txtLeaderboard.Substring(0, txtLeaderboard.Length - 2);
+		txtLeaderboard = txtLeaderboard.Substring(0, txtLeaderboard.Length - 1);
 
 		HUD.Instance.textLeaderBoard.text = txtLeaderboard;
 		HUD.Instance.panelLeaderBoard.SetActive(true);

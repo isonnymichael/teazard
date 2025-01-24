@@ -115,28 +115,43 @@ mergeInto(LibraryManager.library, {
     },
 
     getLeaderboard: function() {
-
         try {
             console.log("load leaderboard js");
-            firebase.database().ref('idle-game').orderByChild('-level').limitToFirst(10).once('value', function(snapshot) {
-                var _leaderboard = {};
-                snapshot.forEach(function(childSnapshot) {
-                  var userId = childSnapshot.key;
-                  var userData = childSnapshot.val();
-                  _leaderboard[userId] = userData;
-                });
-                var sortedLeaderboard = Object.keys(_leaderboard).sort(function(a, b) {
-                  return _leaderboard[b].level - _leaderboard[a].level;
-                }).reduce(function(sortedObj, key) {
-                  sortedObj[key] = _leaderboard[key];
-                  return sortedObj;
-                }, {});
 
-                window._unityInstance.SendMessage("GameManager", "OnGetLeaderboard", JSON.stringify(sortedLeaderboard));
-            });
+            // Retrieve all records without limit
+            firebase.database().ref('idle-game')
+                .orderByChild('level')   // Ascending order by 'level'
+                .once('value', function(snapshot) {
+                    var _leaderboard = {};
+                    snapshot.forEach(function(childSnapshot) {
+                        var userId = childSnapshot.key;
+                        var userData = childSnapshot.val();
+                        _leaderboard[userId] = userData;
+                    });
+
+                    // Sort the leaderboard by level in descending order
+                    var sortedLeaderboard = Object.keys(_leaderboard).sort(function(a, b) {
+                        return _leaderboard[b].level - _leaderboard[a].level; // Descending order
+                    }).reduce(function(sortedObj, key) {
+                        sortedObj[key] = _leaderboard[key];
+                        return sortedObj;
+                    }, {});
+
+                    // Extract the top 10 players after sorting
+                    var top10Leaderboard = Object.keys(sortedLeaderboard).slice(0, 10).reduce(function(obj, key) {
+                        obj[key] = sortedLeaderboard[key];
+                        return obj;
+                    }, {});
+
+                    console.log("Top 10 Leaderboard: ", top10Leaderboard);
+
+                    // Send the top 10 leaderboard to Unity
+                    window._unityInstance.SendMessage("GameManager", "OnGetLeaderboard", JSON.stringify(top10Leaderboard));
+                });
 
         } catch (error) {
-           return 'error';
+            console.error('Error getting leaderboard:', error);
+            return 'error';
         }
     }
 
