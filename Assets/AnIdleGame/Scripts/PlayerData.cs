@@ -4,7 +4,9 @@ using System.Collections;
 using System.IO;
 using System.Xml.Serialization;
 
-//custom class to store skill details
+/*
+* This script is responsible for saving and loading player data to/from an XML file. It uses the XmlSerializer class from System namespace in C# 
+*/  
 [System.Serializable]
 public class Skill
 {
