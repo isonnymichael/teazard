@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//script used to created the background
+/*
+* This script is for controlling environment setup and generation of a level or map within Unity game development using C# programming language 
+*/
 public class Environment : MonoBehaviour {
 
 	public GameObject[] floorTiles;
