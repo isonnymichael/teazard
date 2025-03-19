@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//script used to show and hide popup
+/*
+* This script is responsible for creating a pop-ups in the game world, such as when player interacts with an object or item   
+*/   
 public class Popup : MonoBehaviour {
 
 	public GameObject popup;
