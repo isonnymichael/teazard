@@ -105,8 +105,7 @@ public class Player : MonoBehaviour {
 			}
 			catch (System.Exception ex)
 			{
-				Debug.Log(ex);
-				
+
 				HUD.Instance.loaderToken.SetActive(false);
 				HUD.Instance.btnTempToken.GetComponent<Button>().interactable = true;
 				HUD.Instance.btnDamageUp.GetComponent<Button>().interactable = true;
