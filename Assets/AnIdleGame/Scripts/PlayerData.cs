@@ -4,8 +4,6 @@ using System.Collections;
 using System.IO;
 using System.Xml.Serialization;
 
-//script used to save the game. The xml file will be saved in Application.persistentDataPath, using "Debug.Log (Application.persistentDataPath);" in case you don't know where it is.
-
 //custom class to store skill details
 [System.Serializable]
 public class Skill
