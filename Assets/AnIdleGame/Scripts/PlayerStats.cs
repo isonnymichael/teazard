@@ -195,8 +195,6 @@ public class PlayerStats : MonoBehaviour {
 				}
 				catch (Exception ex)
 				{
-					Debug.Log(ex);
-
 					HUD.Instance.loaderSpeedUp.SetActive(false);
 					HUD.Instance.btnTempToken.GetComponent<Button>().interactable = true;
 					HUD.Instance.btnDamageUp.GetComponent<Button>().interactable = true;
