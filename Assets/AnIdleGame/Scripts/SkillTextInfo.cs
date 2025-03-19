@@ -2,7 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-//script used to unpdate the skill level and cost texts
+/*
+* This script is responsible for managing player's stats and skills in the game world   
+*/
 public class SkillTextInfo : Popup {
 
 	public Text skillLevelText;
