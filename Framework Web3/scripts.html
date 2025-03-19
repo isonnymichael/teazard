@@ -50,7 +50,6 @@
             firebase.database().ref(`idle-game/${address}`).set(JSON.parse(newPlayer())).then(function(unused) {
               
             });
-            console.log('AFTER');
             return JSON.parse(newPlayer());
         }
 
