@@ -2,7 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-//script controls the HUD object
+/*
+* This script controls the game environment setup and generation of level or map within Unity game development using C# programming language   
+*/ 
 public class HUD : MonoBehaviour {
 
 	//Singleton
