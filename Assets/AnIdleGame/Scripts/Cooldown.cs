@@ -2,7 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-//script controls when to attack and display the colldown visual effect
+/*
+* This script is for controlling the activation of a skill in Unity game development, which includes starting and stopping skills as well as updating their stats based on player's actions or events 
+*/
 public class Cooldown : MonoBehaviour {
 
 	private Image cooldown; //the image of visual effect
