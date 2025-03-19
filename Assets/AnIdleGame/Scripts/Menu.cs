@@ -115,7 +115,6 @@ public class Menu : MonoBehaviour {
 	public void OnGetDataFB(string result)
 	{
 		// get data from db
-		Debug.Log("LOG GET DATA FROM DB");
 		Debug.Log(result);
 
 		//string savedGame = "{\"level\":\"11\",\"money\":\"99990\",\"tempMoney\":\"9\",\"activatedSkillID\":\"1\",\"quitTime\":\"2023-03-28T19:20:03.0197181+07:00\",\"skills\":[{\"ID\":\"0\",\"damageLevel\":\"0\",\"speedLevel\":\"0\",\"unlocked\":\"true\"},{\"ID\":\"1\",\"damageLevel\":\"10\",\"speedLevel\":\"10\",\"unlocked\":\"false\"},{\"ID\":\"2\",\"damageLevel\":\"0\",\"speedLevel\":\"0\",\"unlocked\":\"false\"},{\"ID\":\"3\",\"damageLevel\":\"0\",\"speedLevel\":\"0\",\"unlocked\":\"false\"},{\"ID\":\"4\",\"damageLevel\":\"0\",\"speedLevel\":\"0\",\"unlocked\":\"false\"},{\"ID\":\"5\",\"damageLevel\":\"0\",\"speedLevel\":\"0\",\"unlocked\":\"false\"},{\"ID\":\"6\",\"damageLevel\":\"0\",\"speedLevel\":\"0\",\"unlocked\":\"false\"},{\"ID\":\"7\",\"damageLevel\":\"0\",\"speedLevel\":\"0\",\"unlocked\":\"false\"}]}";
