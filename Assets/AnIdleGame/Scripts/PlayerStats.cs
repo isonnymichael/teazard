@@ -5,7 +5,9 @@ using System.Collections;
 using System.Globalization;
 using Thirdweb;
 
-//script used to upgrade skill 
+/*
+* This script is responsible for managing player's stats and skills. It also handles UI updates, money management etc in the game world  
+*/   
 public class PlayerStats : MonoBehaviour {
 
 	//Singleton
