@@ -264,7 +264,6 @@ public class GameManager : MonoBehaviour {
 			int level = Convert.ToInt32(itemDict["level"]);
 			string quitTime = (string)itemDict["quitTime"];
 			int tempMoney = Convert.ToInt32(itemDict["tempMoney"]);
-			Debug.Log($"key: {key}, level: {level}, quitTime: {quitTime}, tempMoney: {tempMoney}");
 			txtLeaderboard += countLeaderboard +". "+ key+" - Level "+level+"\n";
 			countLeaderboard++;
 		}
