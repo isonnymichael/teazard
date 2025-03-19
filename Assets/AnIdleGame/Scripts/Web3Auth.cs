@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 using Thirdweb;
 
-//script used to keep music playing between two sences
+/*
+* This script handles the connection to Web3 wallets and interacting with smart contracts on Ethereum network.   
+*/
 public class Web3Auth : MonoBehaviour {
 	
 	private static Web3Auth instance;
