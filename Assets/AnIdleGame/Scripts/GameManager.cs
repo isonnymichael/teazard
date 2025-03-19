@@ -163,7 +163,6 @@ public class GameManager : MonoBehaviour {
 
 		HUD.Instance.panelStatusBattle.SetActive(true);
 		HUD.Instance.panelStatusBattle.gameObject.GetComponentInChildren<Text>().text = "Time Out";
-		Debug.Log ("time out");
 	}
 
 	private void SpawnEnemies ()
