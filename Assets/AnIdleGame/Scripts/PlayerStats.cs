@@ -94,7 +94,6 @@ public class PlayerStats : MonoBehaviour {
 		TempMoney = GameManager.Instance.playerData.tempMoney; //load the amount of money
 
 		DateTime quitTime = DateTime.ParseExact(GameManager.Instance.playerData.quitTime, "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-		Debug.Log(quitTime);
 
 		TimeSpan timeSinceLastPlay = DateTime.Now - quitTime; //calculate the time difference between last play and now
 
