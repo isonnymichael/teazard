@@ -11,7 +11,9 @@ using UnityEngine.SceneManagement;
 using Thirdweb;
 using Newtonsoft.Json;
 
-//script used in "Menu" Sence.
+/*
+* This script controls all menu functionalities within Unity using C# programming language   
+*/    
 public class Menu : MonoBehaviour {
 
 	public Button newGameBtn;
