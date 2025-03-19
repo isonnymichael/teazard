@@ -2,7 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-//Script used to controlled the activated skill
+/*
+* This script is used to manage the activation of skills in Unity game development, such as speeding up or damaging enemies by pressing a button (like 'E' for damage and 'R' for speed). It also keeps track of which skill currently active on screen – this information can be accessed through properties.
+*/
 public class ActivatedSkill : Popup {
 
 	//Singleton
