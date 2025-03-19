@@ -4,7 +4,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-//script to control the game
+/*
+* This script is for controlling environment setup and generation of a level or map within Unity game development using C# programming language  
+*/
 public class GameSFX : MonoBehaviour {
 
 	//Singleton
