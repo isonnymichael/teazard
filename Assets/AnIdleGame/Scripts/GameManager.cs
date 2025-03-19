@@ -8,7 +8,9 @@ using System.Linq;
 using Thirdweb;
 using Newtonsoft.Json;
 
-//script to control the game
+/*
+* This script is for controlling the game within Unity using C# programming language. It includes a timer, player data and active skills manager as well which are essential in any multiplayer or online battle royale games  
+*/
 public class GameManager : MonoBehaviour {
 
 	//Singleton
