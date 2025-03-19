@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/*
+* This script is for controlling environment setup and generation of a level or map within Unity game development using C# programming language   
+*/
 public class HealthBar : MonoBehaviour {
 
 	public Color minColor = Color.red; //color when health is low
