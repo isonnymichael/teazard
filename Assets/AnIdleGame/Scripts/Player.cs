@@ -58,8 +58,6 @@ public class Player : MonoBehaviour {
 
 		if (GameManager.Instance.isBattling) //if we kill all enemies in time
 		{
-			Debug.Log ("All Killed");
-
 			GameManager.Instance.StopBattle (true); //we stop the battle with levelCompleted set to true
 			HUD.Instance.panelStatusBattle.SetActive(true);
 			HUD.Instance.panelStatusBattle.gameObject.GetComponentInChildren<Text>().text = "NICE!";
