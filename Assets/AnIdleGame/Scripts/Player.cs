@@ -3,7 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 using Thirdweb;
 
-//script used to control accack
+/*
+* This script controls player's movement within Unity game development using C# programming language    
+*/  
 public class Player : MonoBehaviour {
 
 	private Animator playerAnim; //player animator
