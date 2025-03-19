@@ -224,7 +224,6 @@ public class PlayerStats : MonoBehaviour {
 		}
 		else
 		{
-			Debug.Log ("need more money");
 			GameSFX.Instance.playDeclineSound();
 
 			GameObject popupInstance = (GameObject) Instantiate (HUD.Instance.prefabWarningUp);
