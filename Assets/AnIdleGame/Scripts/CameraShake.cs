@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
+/*
+* This script is for controlling the activation of a skill in Unity game development, which includes starting and stopping skills as well as updating their stats based on player's actions or events 
+*/
 public class CameraShake : MonoBehaviour
 {
 	// Transform of the camera to shake. Grabs the gameObject's transform
