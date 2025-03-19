@@ -2,7 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-//script for each active skill
+/*
+* This script is for managing the player's stats in Unity game development. It keeps track and updates all relevant information about a character, such as health points (HP), mana points(MP) or any other statistic that can change over time
+*/
 public class ActiveSkill : MonoBehaviour {
 
 	public int ID; //the ID of the active skill
