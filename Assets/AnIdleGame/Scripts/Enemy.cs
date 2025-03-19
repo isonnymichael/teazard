@@ -71,8 +71,6 @@ public class Enemy : MonoBehaviour {
 	{
 		if (!anim) //see if ther is no monster prefab under this enemy object. this should never happen
 		{
-			Debug.Log ("Need to reset monster");
-
 			return;
 		}
 
