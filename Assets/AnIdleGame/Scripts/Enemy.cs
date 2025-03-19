@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//script controls the enemy
+/*
+* This script is for controlling the enemy in Unity game development, which includes spawning enemies and dealing damage to players when they collide with them. It also handles all of these actions including updating their stats based on player's actions or events
+*/
 public class Enemy : MonoBehaviour {
 	
 	public GameObject damagePopup; //a reference to the damagePopup prefab
