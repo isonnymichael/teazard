@@ -9,20 +9,20 @@ The game is integrated with the **Tea Assam (Testnet)** network and developed us
 ## Demo
 
 Check out the live demo here:  
-[https://teazard.vercel.app/](https://teazard.vercel.app/)
+[https://teazard.my.id/](https://teazard.my.id/)
 
 ## How to Play
 
-1. **Connect to the Tea Assam (Testnet)**  
-   Follow the guide: [https://assam.tea.xyz/](https://assam.tea.xyz/)
+1. **Connect to the Sepolia Tea (Testnet)**  
+   Follow the guide: [https://tea.xyz/sepolia](https://tea.xyz/sepolia)
 
 2. **Claim Assam Tea Tokens**  
-   Use the faucet to get testnet tokens: [https://faucet-assam.tea.xyz/](https://faucet-assam.tea.xyz/)
+   Use the faucet to get testnet tokens: [https://faucet-sepolia.tea.xyz/](https://faucet-sepolia.tea.xyz/)
 
 3. **Start the Game**  
    Interact with the game and use your TZD Tokens to upgrade stats and progress.
 
-TZD token contract: `0x7d601326D46cDc91Ae326FC062632B87cc35ba3f`
+TZD token contract: `0x89a4C0f4F0E4023ef8B8106DDc9f64681FFd57CD`
 
 ## Features
 
@@ -34,7 +34,7 @@ TZD token contract: `0x7d601326D46cDc91Ae326FC062632B87cc35ba3f`
 ## Tech Stack
 
 - **Game Engine:** Unity  
-- **Blockchain:** Tea Assam (Testnet)  
+- **Blockchain:** Tea Sepolia (Testnet)  
 
 ## Setup and Installation
 
