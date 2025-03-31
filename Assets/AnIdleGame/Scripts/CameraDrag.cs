@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class CameraDrag : MonoBehaviour
 {
+    [Header("Drag Settings")]
     public float dragSpeed = 2f;
-    private float minX = -137f, maxX = 205f; // Set fixed movement boundaries
+    private float minX = -137f, maxX = 205f;
+
+    [Header("Auto-Pan Settings")]
+    public float autoPanDuration = 3f; // Durasi perpindahan (detik)
+    public AnimationCurve autoPanCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // Kurva easing
 
     private Vector3 dragOrigin;
     private int lastScreenWidth, lastScreenHeight;
@@ -13,30 +18,45 @@ public class CameraDrag : MonoBehaviour
     private float smoothTime = 0.2f;
     private Vector3 velocity = Vector3.zero;
 
-    private bool canDrag = true; // Flag to enable/disable dragging
+    private bool canDrag = true;
+    private bool isAutoPanning = false;
+    private float autoPanProgress = 0f;
+    private Vector3 autoPanStartPos;
 
     void Start()
     {
         cameraShake = GetComponent<CameraShake>();
 
-        // ✅ Set position to -137 when starting in portrait mode
-        if (Screen.width < Screen.height) 
+        // ✅ Auto-pan hanya di portrait mode
+        if (Screen.width < Screen.height)
         {
-            transform.position = new Vector3(minX, transform.position.y, transform.position.z);
-        }
+            autoPanStartPos = new Vector3(maxX, transform.position.y, transform.position.z);
+            targetPosition = new Vector3(minX, transform.position.y, transform.position.z);
+            transform.position = autoPanStartPos;
+            isAutoPanning = true;
+            autoPanProgress = 0f;
 
-        targetPosition = transform.position;
+            // ✅ Nonaktifkan CameraShake sementara selama auto-pan
+            if (cameraShake != null)
+            {
+                cameraShake.enabled = false;
+            }
+        }
+        else
+        {
+            targetPosition = transform.position;
+        }
     }
 
     void Update()
     {
-        // Check for screen size changes to adjust camera bounds
+        // Update screen size changes
         if (Screen.width != lastScreenWidth || Screen.height != lastScreenHeight)
         {
             UpdateCameraBounds();
         }
 
-        // ✅ Disable dragging in landscape mode
+        // ✅ Nonaktifkan drag di landscape mode
         if (Screen.width > Screen.height)
         {
             canDrag = false;
@@ -47,6 +67,26 @@ public class CameraDrag : MonoBehaviour
             canDrag = true;
         }
 
+        // ✅ Auto-pan logic (lebih smooth dengan AnimationCurve)
+        if (isAutoPanning)
+        {
+            autoPanProgress += Time.deltaTime / autoPanDuration;
+            float t = autoPanCurve.Evaluate(autoPanProgress);
+            transform.position = Vector3.Lerp(autoPanStartPos, targetPosition, t);
+
+            // Selesai auto-pan
+            if (autoPanProgress >= 1f)
+            {
+                isAutoPanning = false;
+                if (cameraShake != null)
+                {
+                    cameraShake.enabled = true; // Aktifkan kembali CameraShake
+                }
+            }
+            return; // Skip input drag selama auto-pan
+        }
+
+        // Input drag (hanya jika tidak auto-panning)
         if (canDrag && Input.GetMouseButtonDown(0))
         {
             dragOrigin = Input.mousePosition;
@@ -55,26 +95,20 @@ public class CameraDrag : MonoBehaviour
         if (canDrag && Input.GetMouseButton(0))
         {
             Vector3 difference = Input.mousePosition - dragOrigin;
-
-            // ✅ Fix movement so it does not snap unexpectedly
             if (difference.sqrMagnitude > 0.01f)
             {
                 float moveX = -difference.x * dragSpeed * Time.deltaTime;
-
-                // Update target position
                 targetPosition = transform.position + new Vector3(moveX, 0, 0);
                 targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
-
-                // ✅ Update drag origin correctly after moving
                 dragOrigin = Input.mousePosition;
             }
         }
 
-        // Smooth camera movement
+        // Smoothing pergerakan kamera
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 
-        // ✅ Ensure CameraShake does not override new position
-        if (cameraShake != null)
+        // ✅ Update CameraShake reference position
+        if (cameraShake != null && !isAutoPanning)
         {
             cameraShake.SetOriginalLocalPos(transform.localPosition);
         }
@@ -82,7 +116,6 @@ public class CameraDrag : MonoBehaviour
 
     void UpdateCameraBounds()
     {
-        // ✅ Ensure bounds remain fixed
         lastScreenWidth = Screen.width;
         lastScreenHeight = Screen.height;
     }
