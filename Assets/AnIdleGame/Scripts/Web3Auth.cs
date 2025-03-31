@@ -14,7 +14,7 @@ public class Web3Auth : MonoBehaviour {
 	public string valueToken;
 	public string displayValueToken;
 	public string symbolToken;
-	public int chainId = 93384;
+	public int chainId = 10218;
 
 	public Contract contractToken;
 	public Contract contractGame;
@@ -36,7 +36,7 @@ public class Web3Auth : MonoBehaviour {
 	{
 		if (instance == null)
 		{
-			sdk = new ThirdwebSDK("https://assam-rpc.tea.xyz");
+			sdk = new ThirdwebSDK("https://tea-sepolia.g.alchemy.com/public");
 			instance = this;
 		}
 		else
