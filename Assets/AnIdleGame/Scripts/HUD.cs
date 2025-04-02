@@ -39,6 +39,8 @@ public class HUD : MonoBehaviour {
 	public GameObject btnLeaderBoard;
 	public GameObject panelLeaderBoard;
 	public Text textLeaderBoard;
+	public GameObject btnAchievement;
+	public GameObject panelAchievement;
 
 	private CanvasGroup abilityWindow; //the active skill selecting window
 

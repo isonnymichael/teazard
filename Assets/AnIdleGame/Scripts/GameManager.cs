@@ -227,6 +227,18 @@ public class GameManager : MonoBehaviour {
 			
 	}
 
+	public void ShowAchievement()
+	{
+		ShowingAchievement();
+	}
+
+	public void ShowingAchievement ()
+	{
+		GameSFX.Instance.playClickSound();
+		HUD.Instance.btnAchievement.GetComponent<Button>().interactable = false;
+		HUD.Instance.panelAchievement.SetActive(true);
+	}
+
 	public void ShowLeaderboard()
 	{
 		ShowingLeaderboard();

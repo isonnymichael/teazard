@@ -7,8 +7,14 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
-    <title>Teazard</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+    
+    <meta name="google-adsense-account" content="ca-pub-8681602836348136">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8681602836348136"
+     crossorigin="anonymous"></script>
+
+
+    <title>TEAZARD</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico?v=0.1" />
     <link rel="stylesheet" href="TemplateData/style.css" />
   </head>
   <body class="dark">
@@ -25,7 +31,7 @@
       </div>
     </div>
     <div id="unity-fullscreen-button" style="display: none"></div>
-
+    
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -45,11 +51,21 @@
         firebase.initializeApp(firebaseConfig);
         var _wall = '';
         
+        async function checkAndRegisterWall(_wall) {
+            const snapshot = await firebase.database().ref(`idle-game/${_wall}`).once('value');
+            if (!snapshot.exists()) {
+                await register(_wall); // Assuming register is an async function
+            } else {
+                console.log(`Wall ${_wall} sudah terdaftar.`);
+            }
+        }
+
         function register(address){
 
             firebase.database().ref(`idle-game/${address}`).set(JSON.parse(newPlayer())).then(function(unused) {
               
             });
+            console.log('AFTER');
             return JSON.parse(newPlayer());
         }
 
@@ -60,6 +76,7 @@
                 snapshot.forEach(function(childSnapshot) {
                     _leaderboard.push(childSnapshot.val());
                 });
+                console.log(JSON.stringify(_leaderboard));
             });
         }
 
@@ -89,14 +106,18 @@
             return _newPlayer;
         }
 
-        window.addEventListener('beforeunload', function (e) {
+        window.addEventListener('beforeunload', async function (e) {
             // Cancel the event
             e.preventDefault();
             e.returnValue = '';
             
-            firebase.database().ref(`idle-game/${_wall}/quitTime`).set(getCurrentLocalTZ()).then(function(unused) {
+            await checkAndRegisterWall(_wall); // Ensure checkAndRegisterWall finishes before proceeding
 
-            });
+            if (_wall == null || _wall == '') {  
+                return;
+            }
+
+            await firebase.database().ref(`idle-game/${_wall}/quitTime`).set(getCurrentLocalTZ());
         });
 
         window.ethereum.on('accountsChanged', function (accounts) {
@@ -106,18 +127,34 @@
         })
 
     </script>
+    
+    <script>
+          function checkOrientation() {
+              if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                  if (window.innerHeight > window.innerWidth) {
+                      alert("Please rotate your device to landscape mode for a better experience.");
+                      location.reload();
+                  }
+              }
+          }
 
+          window.addEventListener("orientationchange", function() {
+            location.reload();
+          });
+          checkOrientation();
+    </script>
+    
     <script type="module">
             const hideFullScreenButton = "";
             const buildUrl = "Build";
-            const loaderUrl = buildUrl + "/Build.loader.js";
+            const loaderUrl = buildUrl + "/teazard-build.loader.js";
             const config = {
-              dataUrl: buildUrl + "/Build.data",
-              frameworkUrl: buildUrl + "/Build.framework.js",
-              codeUrl: buildUrl + "/Build.wasm",
+              dataUrl: buildUrl + "/teazard-build.data",
+              frameworkUrl: buildUrl + "/teazard-build.framework.js",
+              codeUrl: buildUrl + "/teazard-build.wasm",
               streamingAssetsUrl: "StreamingAssets",
               companyName: "DefaultCompany",
-              productName: "My project",
+              productName: "TEAZARD",
               productVersion: "1.0",
             };
 
@@ -175,5 +212,6 @@
             };
             document.body.appendChild(script);
     </script>
-  </body>
+  
+</body>
 </html>
