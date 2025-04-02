@@ -18,6 +18,7 @@ public class Web3Auth : MonoBehaviour {
 
 	public Contract contractToken;
 	public Contract contractGame;
+	public Contract contractNFT;
 
 	public static Web3Auth Instance
 	{
@@ -36,7 +37,15 @@ public class Web3Auth : MonoBehaviour {
 	{
 		if (instance == null)
 		{
-			sdk = new ThirdwebSDK("https://tea-sepolia.g.alchemy.com/public");
+			var options = new ThirdwebSDK.Options
+            {
+                storage = new ThirdwebSDK.StorageOptions
+                {
+                    ipfsGatewayUrl = "https://ipfs.io/ipfs/"
+                }
+            };
+
+			sdk = new ThirdwebSDK("https://tea-sepolia.g.alchemy.com/public", options);
 			instance = this;
 		}
 		else
